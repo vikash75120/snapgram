@@ -12,33 +12,57 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import { useRef } from "react";
+import { grey } from "@mui/material/colors";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
-const Login = () => {
-   const [EmailChange, setEmailChange] = useState();
-   const [validEmail,setValidEmail] = useState(true);
-   const [validPassword,setValidPassword] = useState(true);
+const LoginSignup = () => {
+   const emailChange = useRef("");
+   const [validEmail, setValidEmail] = useState(true);
+   const [validPassword, setValidPassword] = useState(true);
 
    function validateEmail(email) {
       var regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
       return regex.test(email);
    }
    const handleEmailChange = (e) => {
-      setEmailChange(e.target.value);
-      setValidEmail(validateEmail(EmailChange));
+      if (e.target.value.length < 1) {
+         setValidEmail(true);
+      } else {
+         setValidEmail(validateEmail(e.target.value));
+      }
    };
+   console;
 
    const handlePasswordChange = (e) => {
-    setValidPassword(e.target.value);
- };
+      const curretEnteredValue = e.target.value.charAt(
+         e.target.value.length - 1
+      );
+      if (e.target.value.length === 0) {
+         setValidPassword(true);
+      } else if (
+         e.target.value.length < 6 ||
+         e.target.value.length > 12 ||
+         curretEnteredValue === " "
+      ) {
+         setValidPassword(false);
+      } else {
+         setValidPassword(true);
+      }
+      const prevPassword = e.target.value;
+   };
    const handleSubmit = (event) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
-      console.log({
+      const formDetails = {
          email: data.get("email"),
          password: data.get("password"),
-      });
+      };
+      if (formDetails.email.length === 0 && formDetails.password.length === 0) {
+         setValidEmail(false);
+         setValidPassword(false);
+      }
    };
 
    return (
@@ -61,6 +85,7 @@ const Login = () => {
                   flexDirection: "column",
                   alignItems: "center",
                }}
+               
             >
                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                   <LockOutlinedIcon />
@@ -75,20 +100,20 @@ const Login = () => {
                   sx={{ mt: 1 }}
                >
                   <TextField
-                     error = {!validEmail}
+                     error={!validEmail}
                      margin="normal"
                      required
                      fullWidth
                      id="email"
                      label="Email Address"
                      name="email"
-                     autoComplete="email"
                      autoFocus
-                     helperText = {!validEmail && "Enter a valid email id"}
+                     helperText={!validEmail && "Enter a valid email id"}
+                     ref={emailChange}
                      onChange={handleEmailChange}
                   />
                   <TextField
-                  error = {validPassword.length<6 && true}
+                     error={!validPassword && true}
                      margin="normal"
                      required
                      fullWidth
@@ -97,7 +122,10 @@ const Login = () => {
                      type="password"
                      id="password"
                      autoComplete="current-password"
-                     helperText = {validPassword.length<6 && "Enter a valid email id"}
+                     helperText={
+                        !validPassword &&
+                        "password must be 6 to 12 characters and should not contain spaces"
+                     }
                      onChange={handlePasswordChange}
                   />
                   <FormControlLabel
@@ -148,4 +176,4 @@ const Login = () => {
    );
 };
 
-export default Login;
+export default LoginSignup;
