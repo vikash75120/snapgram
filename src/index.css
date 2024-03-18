@@ -2,3 +2,19 @@ body{
     margin: 0;
     padding: 0;
 }
+
+.applyTheseStyles{
+    color:#6037AB !important;
+    display: none !important;
+}
+
+@media(max-width: 600px){
+    .addColor{
+        display: none !important;
+    }
+    .applyTheseStyles{
+        color:#6037AB !important;
+        display: block !important;
+    }
+    
+}
