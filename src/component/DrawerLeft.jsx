@@ -23,8 +23,8 @@ import { signOut } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/initialApp";
 
-const DrawerLeft = ({handleDrawerToggle}) => {
-   const { code, bgColor, textColor, iconColor,cardColor,hoverCardColor } = useSelector((state) => state.theme);
+const DrawerLeft = ({ handleDrawerToggle }) => {
+   const { code, bgColor, textColor, iconColor, cardColor, hoverCardColor } = useSelector((state) => state.theme);
    const token = useSelector((state) => state.authToken.token);
    const userData = useSelector((state) => state.authToken.userData);
    // console.log("hi from drawer");
@@ -93,6 +93,8 @@ const DrawerLeft = ({handleDrawerToggle}) => {
 
    const handleUserProfile = () => {
       navigate("/UserProfile");
+      handleDrawerToggle();
+
    };
 
    return (
@@ -112,7 +114,16 @@ const DrawerLeft = ({handleDrawerToggle}) => {
                Snapgram
             </Typography>
          </Box>
-         <button style={{ backgroundColor: "transparent", boxShadow: "none", border: "none", cursor: "pointer" }} onClick={handleUserProfile}>
+         <button
+            style={{
+               backgroundColor: "transparent",
+               boxShadow: "none",
+               border: "none",
+               cursor: "pointer",
+               WebkitTapHighlightColor: 'transparent'
+            }}
+            onClick={handleUserProfile}
+         >
             <Box
                sx={{
                   display: "flex",
@@ -149,27 +160,28 @@ const DrawerLeft = ({handleDrawerToggle}) => {
                         backgroundColor: "transparent",
                         "&:hover": {
                            backgroundColor: "transparent",
-                        }
+                        },
+               WebkitTapHighlightColor: 'transparent'
+
                      }}
                      to={item.link}
                      onClick={handleDrawerToggle}
                      end
                   >
-                     {(isActive)=>(
+                     {(isActive) => (
                         <ListItemButton
-                        sx={{
-                           pl: 4,
-                           pt: 1,
-                           bgcolor: isActive.isActive && cardColor,
-                            ":hover": {
-                              backgroundColor: hoverCardColor
-                            }
-                        }}
-                        
-                     >
-                        <ListItemIcon>{item.icon}</ListItemIcon>
-                        <ListItemText primary={item.text} />
-                     </ListItemButton>
+                           sx={{
+                              pl: 4,
+                              pt: 1,
+                              bgcolor: isActive.isActive && cardColor,
+                              ":hover": {
+                                 backgroundColor: hoverCardColor,
+                              },
+                           }}
+                        >
+                           <ListItemIcon>{item.icon}</ListItemIcon>
+                           <ListItemText primary={item.text} />
+                        </ListItemButton>
                      )}
                   </NavLink>
                </ListItem>

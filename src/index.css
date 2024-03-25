@@ -23,3 +23,7 @@ active{
     }
     
 } */
+
+button:active {
+    background-color: blue;
+ }

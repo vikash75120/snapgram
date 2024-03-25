@@ -30,7 +30,6 @@ const Navbar2 = ({ drawerWidth }) => {
    const handleDrawerToggle = () => {
       if (!isClosing) {
          setMobileOpen(!mobileOpen);
-         console.log("handleDrawerToggle is called");
       }
    };
 
