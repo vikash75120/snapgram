@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import CropOriginalIcon from "@mui/icons-material/CropOriginal";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SmallPostCard from "../cards/SmallPostCard";
-import PersonIcon from '@mui/icons-material/Person';
+import PersonIcon from "@mui/icons-material/Person";
 import SavedCard from "./SavedCard";
 
 const UserProfile = () => {
@@ -20,18 +20,19 @@ const UserProfile = () => {
       navigate("/edituserprofile");
    };
 
-   const handlePostLikedClick=()=>{
-      setpostLikedState(prev=>!prev)
-   }
+   const handlePostLikedClick = () => {
+      setpostLikedState((prev) => !prev);
+   };
 
    const [a, setA] = useState([]);
    const likedPost = userData.liked;
    useEffect(() => {
-         setA(
-            likedPost && likedPost.map( (data) => {
-               return <SavedCard data={data} key={data}/>
+      setA(
+         likedPost &&
+            likedPost.map((data) => {
+               return <SavedCard data={data} key={data} />;
             })
-         );
+      );
    }, [likedPost]);
 
    return (
@@ -39,12 +40,12 @@ const UserProfile = () => {
          sx={{
             height: "100vh",
             width: { xs: "100%", sm: `calc(100% - ${drawerWidth}px)` },
-            pt: { xs: "30px", sm: "0px" },
             overflow: "scroll",
             scrollbarWidth: "none",
+            scrollBehavior: "smooth"
          }}
       >
-         <Box sx={{ m: 5 }}>
+         <Box sx={{ m: 5, mt: { xs: "70px", sm: 5 }, }}>
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                <Typography component="h1" variant="h5">
                   User Profile
@@ -141,17 +142,26 @@ const UserProfile = () => {
                {postLikedState ? (
                   <Box sx={{ mt: 4 }}>
                      <Grid container spacing={3}>
-                        {userData.posts && userData.posts.map((post) => (
-                           <Grid item xs={12} sm={12} md={4} lg={3} key={post.id}>
-                              <SmallPostCard img={post.image} userName={userData.name} userImg={userData.image} id={post.id} like={post.like} saved={post.saved} />
-                           </Grid>
-                        ))}
+                        {userData.posts &&
+                           userData.posts.map((post) => (
+                              <Grid item xs={12} sm={12} md={4} lg={3} key={post.id}>
+                                 
+                                          <SmallPostCard
+                                             img={post.image}
+                                             userName={userData.name}
+                                             userImg={userData.image}
+                                             id={post.id}
+                                             like={post.like}
+                                             saved={post.saved}
+                                          />
+                              </Grid>
+                           ))}
                      </Grid>
                   </Box>
                ) : (
                   <Box sx={{ mt: 4 }}>
                      <Grid container spacing={3}>
-                     {a}
+                        {a}
                      </Grid>
                   </Box>
                )}

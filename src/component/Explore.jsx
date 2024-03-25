@@ -38,12 +38,11 @@ const Explore = () => {
          sx={{
             height: "100vh",
             width: { xs: "100%", sm: `calc(100% - ${drawerWidth}px)` },
-            pt: { xs: "30px", sm: "0px" },
             overflow: "scroll",
             scrollbarWidth: "none",
          }}
       >
-         <Box sx={{ p: 5 }}>
+         <Box sx={{ p: 5, mt: { xs: "30px", sm: "0px" }, }}>
             <Typography component="h1" variant="h5">
                Explore
             </Typography>
@@ -66,9 +65,6 @@ const Explore = () => {
                   </Grid>
                )}
             </Box>
-            <Typography className="applyTheseStyles " variant="h6">
-               Working with Responsiveness
-            </Typography>
          </Box>
       </Box>
    );

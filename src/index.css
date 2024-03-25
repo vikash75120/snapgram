@@ -3,6 +3,11 @@ body{
     padding: 0;
 }
 
+active{
+    background-color: red;
+}
+
+/* 
 .applyTheseStyles{
     color:#6037AB !important;
     display: none !important;
@@ -17,4 +22,4 @@ body{
         display: block !important;
     }
     
-}
+} */

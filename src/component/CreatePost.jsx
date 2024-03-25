@@ -62,12 +62,11 @@ const CreatePost = () => {
          sx={{
             height: "100vh",
             width: { xs: "100%", sm: `calc(100% - ${drawerWidth}px)` },
-            pt: { xs: "30px", sm: "0px" },
             overflow: "scroll",
             scrollbarWidth: "none",
          }}
       >
-         <Box sx={{ m: 5 }}>
+         <Box sx={{ m: 5, mt: { xs: "30px", sm: 5 }, }}>
             <Typography component="h1" variant="h5" m={2}>
                Create Post
             </Typography>

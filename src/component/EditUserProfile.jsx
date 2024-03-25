@@ -71,7 +71,7 @@ const EditUserProfile = () => {
       uploadImage(file);
       setValidEmail(validateEmail(userProfileData.email));
       if (validEmail) {
-         console.log(userProfileData);
+         // console.log(userProfileData);
          const docId = await getUserDataToUpdate(userData.email, dispatch);
          const docRef = doc(db, "users", docId);
          await updateDoc(docRef, {
@@ -82,12 +82,13 @@ const EditUserProfile = () => {
             image: imageUrlState,
          });
          dispatch(setUserData({ ...userProfileData, image: imageUrlState }));
+         navigate("/userprofile");
       }
    };
 
-   const handleCancel = ()=>{
-    navigate("/userprofile")
-   }
+   const handleCancel = () => {
+      navigate("/userprofile");
+   };
 
    useEffect(() => {
       uploadImage(file, setImageUrlState);
@@ -97,12 +98,11 @@ const EditUserProfile = () => {
          sx={{
             height: "100vh",
             width: { xs: "100%", sm: `calc(100% - ${drawerWidth}px)` },
-            pt: { xs: "30px", sm: "0px" },
             overflow: "scroll",
             scrollbarWidth: "none",
          }}
       >
-         <Box sx={{ m: 5 }}>
+         <Box sx={{ m: 5, mt: { xs: "70px", sm: 5 } }}>
             <Typography component="h1" variant="h5" m={2}>
                Edit Profile
             </Typography>
@@ -159,7 +159,6 @@ const EditUserProfile = () => {
                            ":hover": { bgcolor: hoverCardColor, boxShadow: "none" },
                         }}
                         onClick={handleCancel}
-                        
                      >
                         cancel
                      </Button>

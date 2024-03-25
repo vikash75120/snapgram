@@ -14,19 +14,17 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import NoteAddOutlinedIcon from "@mui/icons-material/NoteAddOutlined";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../reducer/themeToggle";
 import { setToken, setUserData } from "../reducer/tokenReducer";
 import { auth } from "../firebase/initialApp";
 import { signOut } from "firebase/auth";
-import { getUserData } from "../firebase/userData";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/initialApp";
 
-
-const DrawerLeft = () => {
-   const { code, bgColor, textColor, iconColor } = useSelector((state) => state.theme);
+const DrawerLeft = ({handleDrawerToggle}) => {
+   const { code, bgColor, textColor, iconColor,cardColor,hoverCardColor } = useSelector((state) => state.theme);
    const token = useSelector((state) => state.authToken.token);
    const userData = useSelector((state) => state.authToken.userData);
    // console.log("hi from drawer");
@@ -140,27 +138,40 @@ const DrawerLeft = () => {
          <List>
             {NavbarItems.map((item) => (
                <ListItem key={item.text} disablePadding>
-                  <ListItemButton
-                     sx={{
-                        pl: 4,
-                        mt: 1,
+                  <NavLink
+                     style={{
+                        textDecoration: "none",
+                        width: "100%",
+                        color: textColor,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "transparent",
+                        "&:hover": {
+                           backgroundColor: "transparent",
+                        }
                      }}
+                     to={item.link}
+                     onClick={handleDrawerToggle}
+                     end
                   >
-                     <Link
-                        style={{
-                           textDecoration: "none",
-                           width: "100%",
-                           color: textColor,
-                           display: "flex",
-                           alignItems: "center",
-                           justifyContent: "center",
+                     {(isActive)=>(
+                        <ListItemButton
+                        sx={{
+                           pl: 4,
+                           pt: 1,
+                           bgcolor: isActive.isActive && cardColor,
+                            ":hover": {
+                              backgroundColor: hoverCardColor
+                            }
                         }}
-                        to={item.link}
+                        
                      >
                         <ListItemIcon>{item.icon}</ListItemIcon>
                         <ListItemText primary={item.text} />
-                     </Link>
-                  </ListItemButton>
+                     </ListItemButton>
+                     )}
+                  </NavLink>
                </ListItem>
             ))}
          </List>

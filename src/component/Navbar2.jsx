@@ -30,6 +30,7 @@ const Navbar2 = ({ drawerWidth }) => {
    const handleDrawerToggle = () => {
       if (!isClosing) {
          setMobileOpen(!mobileOpen);
+         console.log("handleDrawerToggle is called");
       }
    };
 
@@ -39,7 +40,7 @@ const Navbar2 = ({ drawerWidth }) => {
             position="fixed"
             sx={{
                display: { sm: "none" },
-               bgcolor: grey[900],
+               bgcolor: bgColor,
             }}
          >
             <Toolbar>
@@ -65,7 +66,7 @@ const Navbar2 = ({ drawerWidth }) => {
                   }}
                >
                   <InstagramIcon sx={{ margin: 1, color: iconColor }} fontSize="medium" />
-                  <Typography variant="h6" noWrap component="div">
+                  <Typography variant="h6" noWrap component="div" color={ textColor }>
                      Snapgram
                   </Typography>
                </Box>
@@ -88,7 +89,8 @@ const Navbar2 = ({ drawerWidth }) => {
                   },
                }}
             >
-               <DrawerLeft />
+               
+               <DrawerLeft handleDrawerToggle={handleDrawerToggle}  />
             </Drawer>
             <Drawer
                variant="permanent"

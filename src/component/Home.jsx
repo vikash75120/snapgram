@@ -15,7 +15,7 @@ const Home = ({ drawerWidth }) => {
    },[]);
 
    return (
-      <Box>
+      <Box >
          <Navbar2 drawerWidth={drawerWidth} />
          <Outlet />
       </Box>

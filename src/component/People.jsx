@@ -19,15 +19,15 @@ const People = () => {
    }, []);
 
    return (
-      <Box sx={{ height: "100vh", width: { xs: "100%", sm: `calc(100% - ${drawerWidth}px)` }, pt: { xs: "50px", sm: "0px" } }}>
-         <Typography component="h1" variant="h5" m={2}>
+      <Box sx={{ height: "100vh", width: { xs: "100%", sm: `calc(100% - ${drawerWidth}px)` },  }}>
+         <Typography component="h1" variant="h5" m={5} sx={{mt: { xs: "30px", sm: 5 },}} >
             People
          </Typography>
          <Box sx={{ p: "10%" }}>
             <Grid container spacing={2}>
                {topCreator &&
                   topCreator.map((data) => (
-                     <Grid item xs={6} sm={6} md={4} key={data.id}>
+                     <Grid item xs={6} sm={6} md={4} key={data.email}>
                         <CreatorCard cardWidth={230} name={data.name} userName={data.userName} userImg={data.image} />
                      </Grid>
                   ))}
