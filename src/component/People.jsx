@@ -20,10 +20,10 @@ const People = () => {
 
    return (
       <Box sx={{ height: "100vh", width: { xs: "100%", sm: `calc(100% - ${drawerWidth}px)` },  }}>
-         <Typography component="h1" variant="h5" m={5} sx={{mt: { xs: "30px", sm: 5 },}} >
+         <Typography component="h1" variant="h5" m={5} sx={{pt:5,pr:5, mt: { xs: "30px", sm: "0px" },}} >
             People
          </Typography>
-         <Box sx={{ p: "10%" }}>
+         <Box sx={{ pl: "10%",pr: "10%", }}>
             <Grid container spacing={2}>
                {topCreator &&
                   topCreator.map((data) => (

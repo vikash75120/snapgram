@@ -66,7 +66,7 @@ const CreatePost = () => {
             scrollbarWidth: "none",
          }}
       >
-         <Box sx={{ m: 5, mt: { xs: "30px", sm: 5 }, }}>
+         <Box sx={{  p: 5, mt: { xs: "30px", sm: "0px" }, }}>
             <Typography component="h1" variant="h5" m={2}>
                Create Post
             </Typography>

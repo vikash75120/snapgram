@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToken, setUserData } from "../reducer/tokenReducer";
 import { auth, db } from "../firebase/initialApp";
 import { collection, doc, addDoc, updateDoc, getDocs } from "firebase/firestore";
-import { getUserData, getUserDataToUpdate } from "../firebase/userData";
+import {  getUserDataToUpdate } from "../firebase/userData";
 
 const LoginSignup = () => {
    const token = useSelector((state) => state.authToken.token);
@@ -80,7 +80,7 @@ const LoginSignup = () => {
                   navigate("/");
                   // ...
                });
-               const docRef = await addDoc(collection(db, "users"), {
+               await addDoc(collection(db, "users"), {
                   name: formDetails.name,
                   email: formDetails.email,
                   userToken: user.accessToken,
